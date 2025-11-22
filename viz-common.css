@@ -1,0 +1,77 @@
+/* Shared visualization styles: layout, panels, logs, and config modal */
+.viz-config-overlay {
+  position: absolute;
+  left: 0; top: 0; right: 0; bottom: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.45);
+  z-index: 1200;
+}
+.viz-config-panel {
+  width: 420px; max-width: 90%; background: #0f1720; color: #e6eef6; border-radius: 8px; padding: 18px; box-shadow: 0 8px 30px rgba(2,6,23,0.7);
+  border: 1px solid rgba(255,255,255,0.03);
+}
+.viz-config-panel h3 { margin: 0 0 12px 0; font-size: 18px; }
+.viz-config-form .viz-form-row { display:flex; gap:8px; align-items:center; margin-bottom:10px; }
+.viz-config-form label { flex:1; color:#bcd3e6; font-size:13px; }
+.viz-config-form input[type=number] { width:110px; padding:6px 8px; border-radius:6px; border:1px solid rgba(255,255,255,0.06); background:#071021; color:#dceefb; }
+.viz-config-actions { display:flex; gap:8px; justify-content:flex-end; margin-top:12px; }
+.viz-config-actions .btn { padding:8px 12px; border-radius:6px; cursor:pointer; }
+.viz-config-actions .btn-primary { background:#1f6feb; color:#fff; border:none; }
+.viz-config-actions .btn-secondary { background:transparent; color:#cbdfea; border:1px solid rgba(255,255,255,0.04); }
+
+/* Container layout inside the visualization canvas element */
+.viz-main { display:flex; flex-direction:column; height:100%; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; color:#e6eef6; }
+.viz-top { display:flex; gap:12px; align-items:center; padding:8px; }
+.viz-body { display:flex; flex:1; gap:12px; padding:12px; }
+.viz-area { flex:2; background: linear-gradient(180deg,#071021 0%, #081524 100%); border-radius:8px; padding:12px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.02); overflow:hidden; }
+.viz-stats { width:270px; background:#071826; border-radius:8px; padding:12px; box-shadow: 0 4px 18px rgba(2,6,23,0.6); }
+.viz-stats .stat { display:flex; justify-content:space-between; padding:8px 6px; border-bottom:1px solid rgba(255,255,255,0.02); font-size:13px; }
+.viz-log { height:120px; background:#051018; margin-top:10px; border-radius:6px; overflow:auto; padding:8px; font-size:12px; color:#cfe8ff; }
+.viz-node { fill:#0ea5a1; stroke:#08363a; stroke-width:1; }
+.viz-wait { fill:#ffb020; }
+.viz-acquire { fill:#34d399; }
+
+/* IPC common layout (responsive, shared across modules) */
+:root{
+  --ipc-bg:#071524;
+  --ipc-panel:#071826;
+  --ipc-accent:#10b981;
+  --ipc-warn:#f59e0b;
+  --ipc-muted:#475569;
+  --ipc-token-bg:#475569;
+  --ipc-token-fg:#ffffff;
+  --ipc-msg-bg:#60a5fa;
+}
+
+.ipc-container{ display:flex; flex-direction:column; height:100%; width:100%; box-sizing:border-box; overflow:hidden; }
+.ipc-main{ display:flex; flex:1 1 auto; gap:12px; padding:8px; box-sizing:border-box; }
+.ipc-left{ flex: 7 1 0%; min-width:0; display:flex; flex-direction:column; gap:8px; overflow:hidden; }
+.ipc-right{ flex: 3 1 0%; min-width:0; display:flex; flex-direction:column; gap:8px; }
+.ipc-header{ font-weight:700; color:#cfe8ff; padding:6px 8px; }
+.ipc-area{ flex:1 1 auto; background:linear-gradient(180deg,#041018 0%,#071524 100%); border-radius:8px; padding:10px; overflow:hidden; display:flex; flex-direction:column; gap:8px; }
+.ipc-subarea{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+.ipc-queue{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; padding:6px; overflow:auto; max-height:220px; }
+.ipc-cs{ border:2px solid var(--ipc-accent); border-radius:8px; padding:8px; min-height:100px; display:flex; align-items:center; justify-content:center; background:#042f2a; }
+.ipc-bottom{ display:flex; gap:8px; align-items:center; padding:8px; }
+
+.ipc-stats{ background:var(--ipc-panel); border-radius:8px; padding:8px; color:#cfe8ff; display:flex; flex-direction:column; gap:8px; min-width:220px; box-sizing:border-box; }
+.ipc-stats .stat{ display:flex; justify-content:space-between; font-size:13px; padding:6px 4px; border-bottom:1px solid rgba(255,255,255,0.02); }
+
+/* Tokens and messages */
+.ipc-token{ width: clamp(30px,4vw,60px); height: clamp(30px,4vw,60px); min-width: clamp(30px,4vw,60px); min-height: clamp(30px,4vw,60px); display:inline-flex; align-items:center; justify-content:center; border-radius:50%; background:var(--ipc-token-bg); color:var(--ipc-token-fg); font-size: clamp(10px,1vw,14px); box-shadow: 0 2px 8px rgba(0,0,0,0.25); transition: transform 420ms ease, opacity 300ms ease, background 240ms ease; }
+.ipc-token.waiting{ background: var(--ipc-warn); }
+.ipc-token.active{ background: var(--ipc-accent); }
+
+.ipc-message{ display:block; width: clamp(40px,6vw,140px); height: clamp(24px,3.2vw,48px); background:var(--ipc-msg-bg); color:#042a3a; border-radius:6px; padding:6px; box-sizing:border-box; font-size: clamp(10px,1vw,14px); display:flex; align-items:center; justify-content:center; }
+
+/* ensure no overflowing visuals */
+.ipc-container *{ box-sizing:border-box; }
+.ipc-area, .ipc-stats, .ipc-queue, .ipc-cs{ overflow:hidden; }
+
+/* small helpers */
+.ipc-log{ height:100px; overflow:auto; background:#051018; border-radius:6px; padding:8px; color:#cfe8ff; font-size:12px; }
+
+
+/* subtle animation helpers */
+.fade-in { animation: fadeIn 300ms ease both; }
+@keyframes fadeIn { from { opacity:0; transform: translateY(6px);} to { opacity:1; transform: translateY(0);} }

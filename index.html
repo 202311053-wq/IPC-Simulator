@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive OS IPC Visualization Lab</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/popup.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+    <link rel="stylesheet" href="css/developer-panel.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <h1 class="logo">🖥️ IPC Visualization Lab</h1>
+            <div class="nav-buttons">
+                <button class="btn btn-info" id="info-btn">ℹ️ About</button>
+                <button class="btn btn-dark-toggle" id="dark-mode-toggle">🌙 Dark Mode</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- IPC Cards Grid -->
+            <section class="section">
+                <h2>IPC Mechanisms</h2>
+                <div class="cards-grid">
+                    <div class="ipc-card" data-type="mutex">
+                        <div class="card-icon">🔒</div>
+                        <h3>Mutex Lock</h3>
+                        <p>Mutual exclusion lock for thread synchronization</p>
+                        <button class="btn btn-primary visualize-btn">Visualize</button>
+                    </div>
+
+                    <div class="ipc-card" data-type="binary_semaphore">
+                        <div class="card-icon">🚦</div>
+                        <h3>Binary Semaphore</h3>
+                        <p>Semaphore with values 0 or 1</p>
+                        <button class="btn btn-primary visualize-btn">Visualize</button>
+                    </div>
+
+                    <div class="ipc-card" data-type="counting_semaphore">
+                        <div class="card-icon">📊</div>
+                        <h3>Counting Semaphore</h3>
+                        <p>Semaphore for managing multiple resources</p>
+                        <button class="btn btn-primary visualize-btn">Visualize</button>
+                    </div>
+
+                    <div class="ipc-card" data-type="spinlock">
+                        <div class="card-icon">⚡</div>
+                        <h3>Spinlock</h3>
+                        <p>Busy-waiting synchronization primitive</p>
+                        <button class="btn btn-primary visualize-btn">Visualize</button>
+                    </div>
+
+                    <div class="ipc-card" data-type="rw_lock">
+                        <div class="card-icon">📖</div>
+                        <h3>Reader-Writer Lock</h3>
+                        <p>Many readers or single writer access</p>
+                        <button class="btn btn-primary visualize-btn">Visualize</button>
+                    </div>
+
+                    <div class="ipc-card" data-type="pipe">
+                        <div class="card-icon">🔗</div>
+                        <h3>Anonymous Pipe</h3>
+                        <p>One-way communication between parent and child</p>
+                        <button class="btn btn-primary visualize-btn">Visualize</button>
+                    </div>
+
+                    <div class="ipc-card" data-type="named_pipe">
+                        <div class="card-icon">📮</div>
+                        <h3>Named Pipe (FIFO)</h3>
+                        <p>Named inter-process communication channel</p>
+                        <button class="btn btn-primary visualize-btn">Visualize</button>
+                    </div>
+
+                    <div class="ipc-card" data-type="shared_memory">
+                        <div class="card-icon">💾</div>
+                        <h3>Shared Memory</h3>
+                        <p>Direct memory sharing between processes</p>
+                        <button class="btn btn-primary visualize-btn">Visualize</button>
+                    </div>
+
+                    <div class="ipc-card" data-type="message_queue">
+                        <div class="card-icon">📬</div>
+                        <h3>Message Queue</h3>
+                        <p>Asynchronous message passing between processes</p>
+                        <button class="btn btn-primary visualize-btn">Visualize</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Active Connections Panel -->
+            <section class="section panels-section">
+                <div class="panel">
+                    <h3>🔴 Active Connections</h3>
+                    <div id="active-connections-list" class="connections-list">
+                        <p class="empty-state">No active visualizations</p>
+                    </div>
+                </div>
+
+                <!-- Event History Panel -->
+                <div class="panel">
+                    <h3>📝 Global Event History</h3>
+                    <div id="history-list" class="history-list">
+                        <p class="empty-state">No events yet</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Simulation Logs Panel -->
+            <section class="section">
+                <h3>📋 Recent Simulations</h3>
+                <div id="simulation-logs" class="simulation-logs">
+                    <p class="empty-state">No previous simulations</p>
+                </div>
+            </section>
+
+            <!-- Info Section -->
+            <section class="section info-section" id="info-section" style="display: none;">
+                <h2>About IPC Mechanisms</h2>
+                <div class="info-grid">
+                    <div class="info-box">
+                        <h4>🔒 Synchronization Primitives</h4>
+                        <p>Mutex, Semaphores, and Spinlocks are used to synchronize access to shared resources among multiple threads or processes.</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>🔄 IPC Mechanisms</h4>
+                        <p>Pipes, Named Pipes (FIFO), Message Queues, and Shared Memory enable communication and data sharing between separate processes.</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>🎯 Visualization Features</h4>
+                        <p>Each visualization includes real-time process state tracking, animation of IPC operations, event history, and detailed logging.</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>⚙️ Implementation</h4>
+                        <p>This system uses real Linux/WSL system calls for authentic IPC behavior with a visual frontend for educational purposes.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Popup Container -->
+    <div id="popup-container"></div>
+
+    <!-- Modal for Info -->
+    <div id="info-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>About This System</h2>
+            <div class="modal-body">
+                <h3>Interactive OS IPC Visualization Lab</h3>
+                <p>A comprehensive educational tool for visualizing Inter-Process Communication mechanisms in real-time.</p>
+                
+                <h4>Features:</h4>
+                <ul>
+                    <li>Real-time visualization of 9 IPC mechanisms</li>
+                    <li>Live process state tracking with color-coded states</li>
+                    <li>Detailed event history and logging</li>
+                    <li>Replay and step-by-step debugging</li>
+                    <li>Dark mode for extended use</li>
+                    <li>Speed control for simulations</li>
+                </ul>
+
+                <h4>How to Use:</h4>
+                <ol>
+                    <li>Click any IPC mechanism card to open a visualization</li>
+                    <li>Watch the animation show real OS behavior</li>
+                    <li>Review event history to understand each step</li>
+                    <li>Use pause/resume to control simulation</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/websocket.js"></script>
+    <script src="js/visualization.js"></script>
+    <script src="js/developer-panel.js"></script>
+    <script src="js/popup.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/dark-mode.js"></script>
+</body>
+</html>
