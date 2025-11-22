@@ -1,0 +1,229 @@
+/* ============================================================================
+   DEVELOPER PANEL STYLES
+   ============================================================================ */
+
+.developer-panel {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #1e1e1e;
+    color: #e0e0e0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    border-left: 2px solid #007bff;
+}
+
+.dev-panel-header {
+    background: #252526;
+    border-bottom: 1px solid #404040;
+    padding: 0.5rem;
+}
+
+.dev-title {
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 0.5rem;
+}
+
+.dev-tabs {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.dev-tab-btn {
+    background: #1e1e1e;
+    color: #999;
+    border: 1px solid #404040;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    font-size: 0.75rem;
+    border-radius: 2px;
+    transition: all 0.2s ease;
+}
+
+.dev-tab-btn:hover {
+    color: #e0e0e0;
+}
+
+.dev-tab-btn.active {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.dev-panel-content {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+}
+
+.dev-tab {
+    display: none;
+    flex: 1;
+    overflow: auto;
+    padding: 0.5rem;
+}
+
+.dev-tab.active {
+    display: block;
+}
+
+/* ============================================================================
+   CONSOLE TAB
+   ============================================================================ */
+
+.dev-console {
+    background: #1e1e1e;
+    color: #00d400;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    overflow-y: auto;
+    height: 100%;
+    padding: 0.5rem;
+}
+
+.console-line {
+    margin: 0.2rem 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+.console-line.level-info {
+    color: #00d400;
+}
+
+.console-line.level-warn {
+    color: #ffff00;
+}
+
+.console-line.level-error {
+    color: #ff0000;
+}
+
+.console-line.level-debug {
+    color: #0099ff;
+}
+
+.timestamp {
+    color: #999;
+    margin-right: 0.5rem;
+}
+
+.message {
+    color: inherit;
+}
+
+/* ============================================================================
+   PROCESS TAB
+   ============================================================================ */
+
+.dev-process-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 1rem;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    background: #252526;
+    padding: 0.6rem;
+    border-radius: 2px;
+    border-left: 3px solid #007bff;
+}
+
+.info-row .label {
+    font-weight: bold;
+    color: #007bff;
+    min-width: 120px;
+}
+
+.info-row .value {
+    color: #00d400;
+    font-family: 'Courier New', monospace;
+}
+
+/* ============================================================================
+   STATUS TAB
+   ============================================================================ */
+
+.dev-status {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 1rem;
+}
+
+.status-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #252526;
+    padding: 0.8rem;
+    border-radius: 2px;
+    border-left: 3px solid #007bff;
+}
+
+.status-item .label {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 0.3rem 0.6rem;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    background: #404040;
+    color: #999;
+}
+
+.status-badge.status-connected {
+    background: #1b5e20;
+    color: #4caf50;
+}
+
+.status-badge.status-disconnected {
+    background: #5e1b1b;
+    color: #f44336;
+}
+
+.status-value {
+    color: #00d400;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+}
+
+/* ============================================================================
+   SCROLLBAR STYLING
+   ============================================================================ */
+
+.dev-console::-webkit-scrollbar,
+.dev-tab::-webkit-scrollbar {
+    width: 8px;
+}
+
+.dev-console::-webkit-scrollbar-track,
+.dev-tab::-webkit-scrollbar-track {
+    background: #1e1e1e;
+}
+
+.dev-console::-webkit-scrollbar-thumb,
+.dev-tab::-webkit-scrollbar-thumb {
+    background: #404040;
+    border-radius: 4px;
+}
+
+.dev-console::-webkit-scrollbar-thumb:hover,
+.dev-tab::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* ============================================================================
+   DARK MODE
+   ============================================================================ */
+
+/* Developer panel already uses dark theme by default */
